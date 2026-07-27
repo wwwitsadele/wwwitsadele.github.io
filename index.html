@@ -146,7 +146,7 @@
 
     @keyframes fall {
       to {
-        transform: translateY(110vh) rotate(360deg);
+        transform: translateX(var(--wind, 0vw)) translateY(110vh) rotate(360deg);
       }
     }
   </style>
@@ -252,13 +252,17 @@
       blossom.style.left = Math.random() * 100 + "vw";
       blossom.style.animationDuration = (5 + Math.random() * 5) + "s";
       blossom.style.width = (15 + Math.random() * 55) + "px";
+      const wind = ((mouseX / window.innerWidth) - 0.5) * 40;
+      blossom.style.setProperty("--wind", wind + "vw");
       document.body.appendChild(blossom);
       setTimeout(() => blossom.remove(), 10000);
     }
     setInterval(createBlossom, 1500);
 
+    let mouseX = window.innerWidth / 2;
     let lastTrail = 0;
     document.addEventListener("mousemove", e => {
+      mouseX = e.clientX;
       const now = Date.now();
       if (now - lastTrail < 25) return;
       lastTrail = now;
