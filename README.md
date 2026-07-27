@@ -1,2 +1,2 @@
-# www.itsadele.github.io
+# wwwitsadele.github.io
 itsadele
