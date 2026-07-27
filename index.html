@@ -90,11 +90,22 @@
 <body>
   <div class="container">
     <h1>✨ Hi, I’m Ad&eacute;le ✨</h1>
-    <p>Already in bloom. This little corner of the internet is growing into something beautiful —<br>and you arrived right on time.</p>
+    <p id="tagline"></p>
     <p>You can reach me at: <a href="mailto:adele@itsadele.com">adele@itsadele.com</a></p>
   </div>
 
   <script>
+    const taglines = [
+      "Already in bloom. This little corner of the internet is growing into something beautiful — and you arrived right on time.",
+      "Like petals on the wind, every visit is a fresh start. Glad you're here.",
+      "Bloom where you're planted. Right now, that's right here. Welcome.",
+      "No becoming. Just being. And you're part of it.",
+      "The blossoms fall, the gradient shifts, and here you are. Perfect timing.",
+      "This space grows with every visit. Thanks for being part of its story.",
+      "You don't need to become anything you're not already. Just showing up is enough."
+    ];
+    document.getElementById("tagline").textContent = taglines[Math.floor(Math.random() * taglines.length)];
+
     function createBlossom() {
       const blossom = document.createElement("img");
       blossom.src = "blom.png"; // put blossom.png in same folder as index.html
