@@ -81,20 +81,17 @@
       box-shadow: 0 2px 12px rgba(255, 255, 255, 0.15);
     }
 
+    .content-wrapper {
+      overflow: hidden;
+      transition: height 0.35s ease;
+    }
+
     .tab-content {
       display: none;
-      opacity: 0;
-      transform: translateY(8px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
     }
 
     .tab-content.active {
       display: block;
-    }
-
-    .tab-content.visible {
-      opacity: 1;
-      transform: translateY(0);
     }
 
     .cursor-blossom {
@@ -164,23 +161,25 @@
       <button class="tab" data-tab="contact">Contact</button>
     </nav>
 
-    <div id="home" class="tab-content active">
-      <h1 id="greeting">✨ Hi, I&rsquo;m Ad&eacute;le ✨</h1>
-      <p id="tagline"></p>
-      <p class="visitor" id="visitor"></p>
-    </div>
+    <div class="content-wrapper">
+      <div id="home" class="tab-content active">
+        <h1 id="greeting">✨ Hi, I&rsquo;m Ad&eacute;le ✨</h1>
+        <p id="tagline"></p>
+        <p class="visitor" id="visitor"></p>
+      </div>
 
-    <div id="about" class="tab-content">
-      <h1>✨ About Me ✨</h1>
-      <p>I dance at the crossroads of science and soul, where evidence meets empathy and data dances with heart. My work is a garden where hope is planted in the soil of research, watered with compassion, and tended with precision. I believe that every child is a constellation of possibility - each diagnosis is not a destination but a doorway, and I am the guide who walks beside families through that threshold, hand in hand, step by step.</p>
-      <p>My voice is a bridge between fear and understanding, between the weight of worry and the lightness of knowing. I speak in truths wrapped in tenderness, because I know that the hardest conversations often bloom into the deepest trust. I am both compass and companion - steady enough to point the way, soft enough to hold the tears, and bold enough to say what needs to be said with grace.</p>
-      <p>In the quiet spaces between theory and practice, I find my purpose. I am a keeper of stories, a weaver of strategies, a believer in the beautiful mess of becoming. I do not promise easy paths, but I promise a hand to hold and a light to follow - because every journey, no matter how uncertain, is brighter when you walk it with someone who believes in the magic of what&rsquo;s possible. I am Ad&eacute;le, and I am here for the journey.</p>
-    </div>
+      <div id="about" class="tab-content">
+        <h1>✨ About Me ✨</h1>
+        <p>I dance at the crossroads of science and soul, where evidence meets empathy and data dances with heart. My work is a garden where hope is planted in the soil of research, watered with compassion, and tended with precision. I believe that every child is a constellation of possibility - each diagnosis is not a destination but a doorway, and I am the guide who walks beside families through that threshold, hand in hand, step by step.</p>
+        <p>My voice is a bridge between fear and understanding, between the weight of worry and the lightness of knowing. I speak in truths wrapped in tenderness, because I know that the hardest conversations often bloom into the deepest trust. I am both compass and companion - steady enough to point the way, soft enough to hold the tears, and bold enough to say what needs to be said with grace.</p>
+        <p>In the quiet spaces between theory and practice, I find my purpose. I am a keeper of stories, a weaver of strategies, a believer in the beautiful mess of becoming. I do not promise easy paths, but I promise a hand to hold and a light to follow - because every journey, no matter how uncertain, is brighter when you walk it with someone who believes in the magic of what&rsquo;s possible. I am Ad&eacute;le, and I am here for the journey.</p>
+      </div>
 
-    <div id="contact" class="tab-content">
-      <h1>✨ Get in Touch ✨</h1>
-      <p>I&rsquo;d love to hear from you.</p>
-      <a href="mailto:adele@itsadele.com">adele@itsadele.com</a>
+      <div id="contact" class="tab-content">
+        <h1>✨ Get in Touch ✨</h1>
+        <p>I&rsquo;d love to hear from you.</p>
+        <a href="mailto:adele@itsadele.com">adele@itsadele.com</a>
+      </div>
     </div>
   </div>
 
@@ -231,18 +230,40 @@
     }
 
     pickTagline();
-    requestAnimationFrame(() => document.getElementById("home").classList.add("visible"));
+
+    const wrapper = document.querySelector(".content-wrapper");
+    requestAnimationFrame(() => {
+      wrapper.style.height = wrapper.scrollHeight + "px";
+    });
 
     function switchTab(tabId) {
+      if (wrapper.style.height === "0px") return;
+
       document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
-      document.querySelectorAll(".tab-content").forEach(c => {
-        c.classList.remove("active", "visible");
-      });
       document.querySelector(`.tab[data-tab="${tabId}"]`).classList.add("active");
-      const content = document.getElementById(tabId);
-      content.classList.add("active");
-      requestAnimationFrame(() => content.classList.add("visible"));
-      if (tabId === "home") pickTagline();
+
+      const prev = wrapper.scrollHeight;
+      wrapper.style.height = prev + "px";
+      requestAnimationFrame(() => {
+        wrapper.style.height = "0px";
+      });
+
+      const done = () => {
+        wrapper.removeEventListener("transitionend", done);
+        document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+        const content = document.getElementById(tabId);
+        content.classList.add("active");
+        if (tabId === "home") pickTagline();
+        requestAnimationFrame(() => {
+          wrapper.style.height = wrapper.scrollHeight + "px";
+          const done2 = () => {
+            wrapper.removeEventListener("transitionend", done2);
+            wrapper.style.height = "";
+          };
+          wrapper.addEventListener("transitionend", done2);
+        });
+      };
+      wrapper.addEventListener("transitionend", done);
     }
 
     document.querySelectorAll(".tab").forEach(btn => {
