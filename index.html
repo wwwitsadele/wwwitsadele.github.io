@@ -79,10 +79,32 @@
 
     .tab-content {
       display: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
     }
 
     .tab-content.active {
       display: block;
+    }
+
+    .tab-content.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .cursor-blossom {
+      position: fixed;
+      pointer-events: none;
+      border-radius: 50%;
+      z-index: 9999;
+      opacity: 0.7;
+    }
+
+    .visitor {
+      font-size: 0.85rem;
+      margin-top: 1.5rem;
+      opacity: 0.6;
     }
 
     h1 {
@@ -138,8 +160,9 @@
     </nav>
 
     <div id="home" class="tab-content active">
-      <h1>✨ Hi, I&rsquo;m Ad&eacute;le ✨</h1>
+      <h1 id="greeting">✨ Hi, I&rsquo;m Ad&eacute;le ✨</h1>
       <p id="tagline"></p>
+      <p class="visitor" id="visitor"></p>
     </div>
 
     <div id="about" class="tab-content">
@@ -166,37 +189,105 @@
       "This space grows with every visit. Thanks for being part of its story.",
       "You don't need to become anything you're not already. Just showing up is enough."
     ];
-    document.getElementById("tagline").textContent = taglines[Math.floor(Math.random() * taglines.length)];
+
+    function setGreeting() {
+      const h = new Date().getHours();
+      let time;
+      if (h < 12) time = "Good morning";
+      else if (h < 18) time = "Good afternoon";
+      else time = "Good evening";
+      document.getElementById("greeting").textContent = "\u2728 " + time + ", I\u2019m Ad\u00e9le \u2728";
+    }
+    setGreeting();
+
+    let typewriterTimer = null;
+
+    function typeTagline(text, el) {
+      if (typewriterTimer) {
+        clearInterval(typewriterTimer);
+        typewriterTimer = null;
+      }
+      el.textContent = "";
+      let i = 0;
+      typewriterTimer = setInterval(() => {
+        el.textContent += text[i];
+        i++;
+        if (i >= text.length) {
+          clearInterval(typewriterTimer);
+          typewriterTimer = null;
+        }
+      }, 18);
+    }
 
     function pickTagline() {
-      document.getElementById("tagline").textContent = taglines[Math.floor(Math.random() * taglines.length)];
+      const el = document.getElementById("tagline");
+      const text = taglines[Math.floor(Math.random() * taglines.length)];
+      typeTagline(text, el);
+    }
+
+    pickTagline();
+    requestAnimationFrame(() => document.getElementById("home").classList.add("visible"));
+
+    function switchTab(tabId) {
+      document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
+      document.querySelectorAll(".tab-content").forEach(c => {
+        c.classList.remove("active", "visible");
+      });
+      document.querySelector(`.tab[data-tab="${tabId}"]`).classList.add("active");
+      const content = document.getElementById(tabId);
+      content.classList.add("active");
+      requestAnimationFrame(() => content.classList.add("visible"));
+      if (tabId === "home") pickTagline();
     }
 
     document.querySelectorAll(".tab").forEach(btn => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
-        document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
-        btn.classList.add("active");
-        document.getElementById(btn.dataset.tab).classList.add("active");
-        if (btn.dataset.tab === "home") pickTagline();
-      });
+      btn.addEventListener("click", () => switchTab(btn.dataset.tab));
     });
 
     function createBlossom() {
       const blossom = document.createElement("img");
-      blossom.src = "blom.png"; // put blossom.png in same folder as index.html
+      blossom.src = "blom.png";
       blossom.classList.add("blossom");
       blossom.style.left = Math.random() * 100 + "vw";
       blossom.style.animationDuration = (5 + Math.random() * 5) + "s";
       blossom.style.width = (15 + Math.random() * 55) + "px";
       document.body.appendChild(blossom);
-
-      setTimeout(() => {
-        blossom.remove();
-      }, 10000);
+      setTimeout(() => blossom.remove(), 10000);
     }
-
     setInterval(createBlossom, 400);
+
+    let lastTrail = 0;
+    document.addEventListener("mousemove", e => {
+      const now = Date.now();
+      if (now - lastTrail < 25) return;
+      lastTrail = now;
+      const b = document.createElement("div");
+      b.className = "cursor-blossom";
+      const size = 4 + Math.random() * 8;
+      b.style.width = size + "px";
+      b.style.height = size + "px";
+      b.style.left = (e.clientX - size / 2) + "px";
+      b.style.top = (e.clientY - size / 2) + "px";
+      const colors = ["#ffb6c1", "#dda0dd", "#87cefa", "#f6d1e7", "#d8b4e2"];
+      b.style.background = colors[Math.floor(Math.random() * colors.length)];
+      document.body.appendChild(b);
+      let opacity = 0.7;
+      const fade = setInterval(() => {
+        opacity -= 0.035;
+        b.style.opacity = opacity;
+        if (opacity <= 0) {
+          clearInterval(fade);
+          b.remove();
+        }
+      }, 30);
+    });
+
+    fetch("https://api.countapi.xyz/hit/wwwitsadele.github.io/visitors")
+      .then(r => r.json())
+      .then(d => {
+        document.getElementById("visitor").textContent = "you\u2019re visitor #" + d.value;
+      })
+      .catch(() => {});
   </script>
 </body>
 </html>
