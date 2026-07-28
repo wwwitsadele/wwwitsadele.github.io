@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test — Adéle</title>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+    }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #d8b4e2, #a7d7f6, #f6d1e7);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      color: #fff;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.35);
+    }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .card {
+      padding: 2rem;
+      backdrop-filter: blur(6px);
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      width: 500px;
+      max-width: 90vw;
+      height: 60vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .content {
+      overflow-y: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      flex-shrink: 1;
+      min-height: 0;
+    }
+    .content::-webkit-scrollbar { display: none; }
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, #ffb6c1, #dda0dd, #87cefa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: none;
+    }
+    p {
+      font-size: 1.2rem;
+      margin: 0.5rem 0;
+      line-height: 1.6;
+    }
+    a {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.6rem 1.2rem;
+      background: #ffb6c1;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+    a:hover { background: #dda0dd; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>✨ Test Page ✨</h1>
+    <div class="content">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <p>Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin purus.</p>
+      <p>Praesent eget justo at risus feugiat tristique. Vivamus vel nulla eu libero hendrerit condimentum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+      <a href="/">Back to Home</a>
+    </div>
+  </div>
+</body>
+</html>
