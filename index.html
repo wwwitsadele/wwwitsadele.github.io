@@ -265,7 +265,7 @@
       blossom.style.left = Math.random() * 100 + "vw";
       blossom.style.animationDuration = (5 + Math.random() * 5) + "s";
       blossom.style.width = (15 + Math.random() * 55) + "px";
-      blossom.style.zIndex = Math.random() < 0.5 ? 1 : 3;
+      blossom.style.zIndex = Math.random() < 0.75 ? 1 : 3;
       const wind = ((mouseX / window.innerWidth) - 0.5) * 40;
       blossom.style.setProperty("--wind", wind + "vw");
       document.body.appendChild(blossom);
