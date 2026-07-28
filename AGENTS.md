@@ -6,13 +6,12 @@
 
 # Project
 - Static personal landing page for Adéle
-- Glass card with tabs: Home, About Me, Contact
-- Features: falling blossoms, cursor trail, wind effect, time-aware greeting, random taglines, visitor counter
+- Glass card with tabs: Home, About Me, Photos, Contact
+- Features: falling blossoms, cursor trail, wind effect, time-aware greeting, random taglines, visitor counter, photo grid, contact form (staticforms.dev)
 - No build step — deploy by pushing to `main`
 
 # Key files
 - `index.html` — main landing page
-- `test.html` — test page
 - `style.css` — shared styles across all pages
 - `blossom.js` — shared blossom/wind logic for all pages
 - `blom.png` — blossom image for falling animation
