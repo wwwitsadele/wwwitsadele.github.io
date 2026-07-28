@@ -103,6 +103,27 @@
       margin-top: 0.5rem;
       text-align: center;
     }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .photo-grid img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .photo-grid img:hover {
+      transform: scale(1.03);
+      border-color: rgba(255, 255, 255, 0.4);
+      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
+    }
   </style>
 </head>
 <body>
@@ -111,6 +132,7 @@
       <button class="tab active" data-tab="home">Home</button>
       <button class="tab" data-tab="about">About Me</button>
       <button class="tab" data-tab="contact">Contact</button>
+      <button class="tab" data-tab="photos">Photos</button>
     </nav>
 
     <div class="scroll-area">
@@ -124,6 +146,19 @@
         <p>I dance at the crossroads of science and soul, where evidence meets empathy and data dances with heart. My work is a garden where hope is planted in the soil of research, watered with compassion, and tended with precision. I believe that every child is a constellation of possibility - each diagnosis is not a destination but a doorway, and I am the guide who walks beside families through that threshold, hand in hand, step by step.</p>
         <p>My voice is a bridge between fear and understanding, between the weight of worry and the lightness of knowing. I speak in truths wrapped in tenderness, because I know that the hardest conversations often bloom into the deepest trust. I am both compass and companion - steady enough to point the way, soft enough to hold the tears, and bold enough to say what needs to be said with grace.</p>
         <p>In the quiet spaces between theory and practice, I find my purpose. I am a keeper of stories, a weaver of strategies, a believer in the beautiful mess of becoming. I do not promise easy paths, but I promise a hand to hold and a light to follow - because every journey, no matter how uncertain, is brighter when you walk it with someone who believes in the magic of what&rsquo;s possible. I am Ad&eacute;le, and I am here for the journey.</p>
+      </div>
+      <div id="photos" class="tab-content">
+        <h1>✨ Photos ✨</h1>
+        <div class="photo-grid">
+          <img src="https://images.pexels.com/photos/4366840/pexels-photo-4366840.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pink cherry blossoms" loading="lazy">
+          <img src="https://images.pexels.com/photos/30277090/pexels-photo-30277090.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Soft focus cherry blossoms" loading="lazy">
+          <img src="https://images.pexels.com/photos/16995029/pexels-photo-16995029.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pink cherry blossoms close-up" loading="lazy">
+          <img src="https://images.pexels.com/photos/6262609/pexels-photo-6262609.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Cherry blossoms in bloom" loading="lazy">
+          <img src="https://images.pexels.com/photos/31930560/pexels-photo-31930560.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Cherry blossoms pastel sky" loading="lazy">
+          <img src="https://images.pexels.com/photos/31402623/pexels-photo-31402623.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Delicate cherry blossom close-up" loading="lazy">
+          <img src="https://images.pexels.com/photos/36902527/pexels-photo-36902527.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Cherry blossoms blue sky" loading="lazy">
+          <img src="https://images.pexels.com/photos/12516168/pexels-photo-12516168.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pastel spring flowers" loading="lazy">
+        </div>
       </div>
       <div id="contact" class="tab-content">
         <h1>✨ Get in Touch ✨</h1>
