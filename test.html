@@ -81,7 +81,7 @@
     }
     @keyframes fall {
       to {
-        transform: translateY(110vh) rotate(360deg);
+        transform: translateX(var(--wind, 0vw)) translateY(110vh) rotate(360deg);
       }
     }
     .copyright {
@@ -111,6 +111,9 @@
   </div>
   <p class="copyright">&copy; itsadele.com</p>
   <script>
+    let mouseX = window.innerWidth / 2;
+    document.addEventListener("mousemove", e => { mouseX = e.clientX; });
+
     function createBlossom() {
       const blossom = document.createElement("img");
       blossom.src = "blom.png";
@@ -118,7 +121,13 @@
       blossom.style.left = Math.random() * 100 + "vw";
       blossom.style.animationDuration = (5 + Math.random() * 5) + "s";
       blossom.style.width = (15 + Math.random() * 55) + "px";
-      blossom.style.zIndex = Math.random() < 0.75 ? 1 : 3;
+      if (Math.random() < 0.75) {
+        blossom.style.zIndex = 1;
+      } else {
+        blossom.style.zIndex = 3;
+      }
+      const wind = ((0.5 - mouseX / window.innerWidth)) * 40;
+      blossom.style.setProperty("--wind", wind + "vw");
       document.body.appendChild(blossom);
       setTimeout(() => blossom.remove(), 10000);
     }
