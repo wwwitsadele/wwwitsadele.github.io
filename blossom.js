@@ -1,11 +1,8 @@
 let mouseX = window.innerWidth / 2;
-let lastTrail = 0;
+let trail = [];
 
 document.addEventListener("mousemove", e => {
   mouseX = e.clientX;
-  const now = Date.now();
-  if (now - lastTrail < 25) return;
-  lastTrail = now;
   const b = document.createElement("div");
   b.className = "cursor-blossom";
   const size = 4 + Math.random() * 8;
@@ -16,16 +13,25 @@ document.addEventListener("mousemove", e => {
   const colors = ["#ffb6c1", "#dda0dd", "#87cefa", "#f6d1e7", "#d8b4e2"];
   b.style.background = colors[Math.floor(Math.random() * colors.length)];
   document.body.appendChild(b);
-  let opacity = 0.7;
-  const fade = setInterval(() => {
-    opacity -= 0.035;
-    b.style.opacity = opacity;
-    if (opacity <= 0) {
-      clearInterval(fade);
-      b.remove();
-    }
-  }, 30);
+  trail.push({ el: b, opacity: 0.7 });
+  if (trail.length > 80) {
+    const old = trail.shift();
+    old.el.remove();
+  }
 });
+
+function fadeTrail() {
+  for (let i = trail.length - 1; i >= 0; i--) {
+    trail[i].opacity -= 0.035;
+    trail[i].el.style.opacity = trail[i].opacity;
+    if (trail[i].opacity <= 0) {
+      trail[i].el.remove();
+      trail.splice(i, 1);
+    }
+  }
+  requestAnimationFrame(fadeTrail);
+}
+requestAnimationFrame(fadeTrail);
 
 function createBlossom() {
   if (document.querySelectorAll(".blossom").length > 8) return;
