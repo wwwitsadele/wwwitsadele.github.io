@@ -227,10 +227,10 @@
       btn.addEventListener("click", () => switchTab(btn.dataset.tab));
     });
 
-    fetch("https://api.countapi.xyz/hit/wwwitsadele.github.io/visitors")
+    fetch("https://api.counterapi.dev/v1/itsadele/visitors/up")
       .then(r => r.json())
       .then(d => {
-        document.getElementById("visitor").textContent = "you're visitor #" + d.value;
+        document.getElementById("visitor").textContent = "you\u2019re visitor #" + d.count;
       })
       .catch(() => {});
 
