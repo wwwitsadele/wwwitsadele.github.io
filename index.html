@@ -65,19 +65,10 @@
         <p class="visitor" id="visitor"></p>
       </div>
       <div id="about" class="tab-content">
-        <h1 id="about-title">✨ About Me ✨</h1>
-        <div id="about-bio">
-          <p>I dance at the crossroads of science and soul, where evidence meets empathy and data dances with heart. My work is a garden where hope is planted in the soil of research, watered with compassion, and tended with precision. I believe that every child is a constellation of possibility - each diagnosis is not a destination but a doorway, and I am the guide who walks beside families through that threshold, hand in hand, step by step.</p>
-          <p>My voice is a bridge between fear and understanding, between the weight of worry and the lightness of knowing. I speak in truths wrapped in tenderness, because I know that the hardest conversations often bloom into the deepest trust. I am both compass and companion - steady enough to point the way, soft enough to hold the tears, and bold enough to say what needs to be said with grace.</p>
-          <p>In the quiet spaces between theory and practice, I find my purpose. I am a keeper of stories, a weaver of strategies, a believer in the beautiful mess of becoming. I do not promise easy paths, but I promise a hand to hold and a light to follow - because every journey, no matter how uncertain, is brighter when you walk it with someone who believes in the magic of what&rsquo;s possible. I am Ad&eacute;le, and I am here for the journey.</p>
-          <button class="tab" id="about-next">Next ✨</button>
-        </div>
-        <div id="about-opencode" style="display:none">
-          <p>This site was built with <a href="https://opencode.ai">opencode</a>, an open-source AI coding assistant that lives in your terminal. It understands your codebase, writes and edits files, runs commands, and answers questions through natural-language chat. Built to be transparent and extensible, it works with any LLM provider and keeps your data under your control.</p>
-          <p>Whether you&rsquo;re debugging, refactoring, or exploring a new codebase, opencode meets you where you are. It reads your project context, follows your conventions, and gets out of your way when you don&rsquo;t need it.</p>
-          <p>Learn more at <a href="https://opencode.ai">opencode.ai</a>.</p>
-          <button class="tab" id="about-back">✨ Back</button>
-        </div>
+        <h1>✨ About Me ✨</h1>
+        <p>I dance at the crossroads of science and soul, where evidence meets empathy and data dances with heart. My work is a garden where hope is planted in the soil of research, watered with compassion, and tended with precision. I believe that every child is a constellation of possibility - each diagnosis is not a destination but a doorway, and I am the guide who walks beside families through that threshold, hand in hand, step by step.</p>
+        <p>My voice is a bridge between fear and understanding, between the weight of worry and the lightness of knowing. I speak in truths wrapped in tenderness, because I know that the hardest conversations often bloom into the deepest trust. I am both compass and companion - steady enough to point the way, soft enough to hold the tears, and bold enough to say what needs to be said with grace.</p>
+        <p>In the quiet spaces between theory and practice, I find my purpose. I am a keeper of stories, a weaver of strategies, a believer in the beautiful mess of becoming. I do not promise easy paths, but I promise a hand to hold and a light to follow - because every journey, no matter how uncertain, is brighter when you walk it with someone who believes in the magic of what&rsquo;s possible. I am Ad&eacute;le, and I am here for the journey.</p>
       </div>
       <div id="contact" class="tab-content">
         <h1>✨ Get in Touch ✨</h1>
@@ -137,24 +128,10 @@
       btn.addEventListener("click", () => switchTab(btn.dataset.tab));
     });
 
-    document.getElementById("about-next").addEventListener("click", () => {
-      document.getElementById("about-bio").style.display = "none";
-      document.getElementById("about-opencode").style.display = "block";
-      document.getElementById("about-title").textContent = "✨ opencode ✨";
-      document.querySelector(".scroll-area").scrollTop = 0;
-    });
-
-    document.getElementById("about-back").addEventListener("click", () => {
-      document.getElementById("about-opencode").style.display = "none";
-      document.getElementById("about-bio").style.display = "block";
-      document.getElementById("about-title").textContent = "✨ About Me ✨";
-      document.querySelector(".scroll-area").scrollTop = 0;
-    });
-
     fetch("https://api.countapi.xyz/hit/wwwitsadele.github.io/visitors")
       .then(r => r.json())
       .then(d => {
-        document.getElementById("visitor").textContent = "you\u2019re visitor #" + d.value;
+        document.getElementById("visitor").textContent = "you're visitor #" + d.value;
       })
       .catch(() => {});
   </script>
