@@ -1,7 +1,30 @@
 let mouseX = window.innerWidth / 2;
+let lastTrail = 0;
 
 document.addEventListener("mousemove", e => {
   mouseX = e.clientX;
+  const now = Date.now();
+  if (now - lastTrail < 25) return;
+  lastTrail = now;
+  const b = document.createElement("div");
+  b.className = "cursor-blossom";
+  const size = 4 + Math.random() * 8;
+  b.style.width = size + "px";
+  b.style.height = size + "px";
+  b.style.left = (e.clientX - size / 2) + "px";
+  b.style.top = (e.clientY - size / 2) + "px";
+  const colors = ["#ffb6c1", "#dda0dd", "#87cefa", "#f6d1e7", "#d8b4e2"];
+  b.style.background = colors[Math.floor(Math.random() * colors.length)];
+  document.body.appendChild(b);
+  let opacity = 0.7;
+  const fade = setInterval(() => {
+    opacity -= 0.035;
+    b.style.opacity = opacity;
+    if (opacity <= 0) {
+      clearInterval(fade);
+      b.remove();
+    }
+  }, 30);
 });
 
 function createBlossom() {
