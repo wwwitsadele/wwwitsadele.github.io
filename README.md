@@ -7,7 +7,6 @@ Personal landing page for Adéle — pastel gradient, glass card, falling blosso
 ```
 itsadele/
 ├── index.html          # Main landing page
-├── test.html           # Test page
 ├── style.css           # Shared styles across all pages
 ├── blossom.js          # Shared blossom/wind/cursor logic
 ├── blom.png            # Blossom image
@@ -15,6 +14,13 @@ itsadele/
 ├── CNAME              # Custom domain (itsadele.com)
 └── AGENTS.md          # AI project context
 ```
+
+## Pages (tabs in index.html)
+
+- **Home** — greeting, random tagline, visitor counter
+- **About Me** — bio
+- **Photos** — blossom gallery (8 Pexels images)
+- **Contact** — form via staticforms.dev
 
 ## Adding a new page
 
@@ -41,4 +47,6 @@ Static site — push to `main` on GitHub. No build step.
 - Glass card with internal scroll
 - Falling blossoms (wind follows cursor, 75% behind glass)
 - Cursor blossom trail
-- Time-aware greeting, random taglines, visitor counter (index.html only)
+- Time-aware greeting, random taglines, visitor counter (Home tab)
+- Photo gallery (Photos tab)
+- Contact form (Contact tab) — submits to staticforms.dev
