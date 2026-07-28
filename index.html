@@ -1,17 +1,14 @@
-<!DOCTYPE html>  
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ad&eacute;le</title>
-    
-    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
-    <link rel="shortcut icon" href="/favicon/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-    <link rel="manifest" href="/favicon/site.webmanifest" />
-
-
+  <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="/favicon/site.webmanifest" />
   <link rel="stylesheet" href="style.css">
   <style>
     .tabs {
@@ -20,7 +17,6 @@
       justify-content: center;
       margin-bottom: 1.5rem;
     }
-
     .tab {
       padding: 0.5rem 1.5rem;
       border: 1px solid rgba(255, 255, 255, 0.2);
@@ -34,23 +30,19 @@
       backdrop-filter: blur(4px);
       letter-spacing: 0.02em;
     }
-
     .tab:hover {
       background: rgba(255, 255, 255, 0.18);
       border-color: rgba(255, 255, 255, 0.35);
       color: #fff;
     }
-
     .tab.active {
       background: linear-gradient(135deg, rgba(255,182,193,0.3), rgba(221,160,221,0.3));
       border-color: rgba(255, 255, 255, 0.5);
       color: #fff;
       box-shadow: 0 2px 12px rgba(255, 255, 255, 0.15);
     }
-
     .tab-content { display: none; }
     .tab-content.active { display: block; }
-
     .visitor {
       font-size: 0.85rem;
       margin-top: 1.5rem;
@@ -72,14 +64,12 @@
         <p id="tagline"></p>
         <p class="visitor" id="visitor"></p>
       </div>
-
-    <div id="about" class="tab-content">
+      <div id="about" class="tab-content">
         <h1>✨ About Me ✨</h1>
         <p>I dance at the crossroads of science and soul, where evidence meets empathy and data dances with heart. My work is a garden where hope is planted in the soil of research, watered with compassion, and tended with precision. I believe that every child is a constellation of possibility - each diagnosis is not a destination but a doorway, and I am the guide who walks beside families through that threshold, hand in hand, step by step.</p>
         <p>My voice is a bridge between fear and understanding, between the weight of worry and the lightness of knowing. I speak in truths wrapped in tenderness, because I know that the hardest conversations often bloom into the deepest trust. I am both compass and companion - steady enough to point the way, soft enough to hold the tears, and bold enough to say what needs to be said with grace.</p>
         <p>In the quiet spaces between theory and practice, I find my purpose. I am a keeper of stories, a weaver of strategies, a believer in the beautiful mess of becoming. I do not promise easy paths, but I promise a hand to hold and a light to follow - because every journey, no matter how uncertain, is brighter when you walk it with someone who believes in the magic of what&rsquo;s possible. I am Ad&eacute;le, and I am here for the journey.</p>
       </div>
-
       <div id="contact" class="tab-content">
         <h1>✨ Get in Touch ✨</h1>
         <p>I&rsquo;d love to hear from you.</p>
@@ -138,8 +128,6 @@
       btn.addEventListener("click", () => switchTab(btn.dataset.tab));
     });
 
-
-
     fetch("https://api.countapi.xyz/hit/wwwitsadele.github.io/visitors")
       .then(r => r.json())
       .then(d => {
@@ -149,4 +137,3 @@
   </script>
 </body>
 </html>
-
