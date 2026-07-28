@@ -21,9 +21,8 @@
 
     body {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      padding-top: 12vh;
+      justify-content: center;
       text-align: center;
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(135deg, #d8b4e2, #a7d7f6, #f6d1e7);
@@ -48,6 +47,9 @@
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
       width: 500px;
       max-width: 90vw;
+      max-height: 70vh;
+      display: flex;
+      flex-direction: column;
     }
 
     .tabs {
@@ -85,8 +87,15 @@
     }
 
     .content-wrapper {
-      overflow: hidden;
-      transition: height 0.35s ease;
+      overflow-y: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      flex-shrink: 1;
+      min-height: 0;
+    }
+
+    .content-wrapper::-webkit-scrollbar {
+      display: none;
     }
 
     .tab-content {
@@ -235,39 +244,13 @@
       document.getElementById("tagline").textContent = taglines[Math.floor(Math.random() * taglines.length)];
     }
 
-    const wrapper = document.querySelector(".content-wrapper");
-    requestAnimationFrame(() => {
-      wrapper.style.height = wrapper.scrollHeight + "px";
-    });
-
     function switchTab(tabId) {
-      if (wrapper.style.height === "0px") return;
-
       document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
       document.querySelector(`.tab[data-tab="${tabId}"]`).classList.add("active");
-
-      const prev = wrapper.scrollHeight;
-      wrapper.style.height = prev + "px";
-      requestAnimationFrame(() => {
-        wrapper.style.height = "0px";
-      });
-
-      const done = () => {
-        wrapper.removeEventListener("transitionend", done);
-        document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
-        const content = document.getElementById(tabId);
-        content.classList.add("active");
-        if (tabId === "home") pickTagline();
-        requestAnimationFrame(() => {
-          wrapper.style.height = wrapper.scrollHeight + "px";
-          const done2 = () => {
-            wrapper.removeEventListener("transitionend", done2);
-            wrapper.style.height = "";
-          };
-          wrapper.addEventListener("transitionend", done2);
-        });
-      };
-      wrapper.addEventListener("transitionend", done);
+      document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+      document.getElementById(tabId).classList.add("active");
+      document.querySelector(".content-wrapper").scrollTop = 0;
+      if (tabId === "home") pickTagline();
     }
 
     document.querySelectorAll(".tab").forEach(btn => {
