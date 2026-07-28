@@ -11,7 +11,10 @@
 - No build step — deploy by pushing to `main`
 
 # Key files
-- `index.html` — single-page site, all CSS/JS inline
+- `index.html` — main landing page
+- `test.html` — test page
+- `style.css` — shared styles across all pages
+- `blossom.js` — shared blossom/wind logic for all pages
 - `blom.png` — blossom image for falling animation
 - `favicon/` — favicon set (PNG, SVG, ICO, web manifest)
 - `CNAME` — custom domain (`itsadele.com`)
