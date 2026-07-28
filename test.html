@@ -71,6 +71,29 @@
       transition: 0.3s;
     }
     a:hover { background: #dda0dd; }
+    .blossom {
+      position: absolute;
+      top: -10vh;
+      pointer-events: none;
+      animation: fall linear infinite;
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+      }
+    }
+    .copyright {
+      position: fixed;
+      bottom: 1rem;
+      right: 1.5rem;
+      font-size: 0.75rem;
+      opacity: 0.5;
+      color: rgba(0,0,0,0.4);
+      text-shadow: 0 1px 2px rgba(255,255,255,0.3);
+      z-index: 1;
+      pointer-events: none;
+      user-select: none;
+    }
   </style>
 </head>
 <body>
@@ -84,5 +107,19 @@
       <a href="/">Back to Home</a>
     </div>
   </div>
+  <p class="copyright">&copy; itsadele.com</p>
+  <script>
+    function createBlossom() {
+      const blossom = document.createElement("img");
+      blossom.src = "blom.png";
+      blossom.classList.add("blossom");
+      blossom.style.left = Math.random() * 100 + "vw";
+      blossom.style.animationDuration = (5 + Math.random() * 5) + "s";
+      blossom.style.width = (15 + Math.random() * 55) + "px";
+      document.body.appendChild(blossom);
+      setTimeout(() => blossom.remove(), 10000);
+    }
+    setInterval(createBlossom, 1500);
+  </script>
 </body>
 </html>
