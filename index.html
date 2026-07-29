@@ -400,20 +400,20 @@
     (function initTab() {
       const home = document.getElementById("home");
       const c = document.querySelector(".container");
+      const tabs = document.querySelector(".tabs");
       home.classList.add("no-anim", "active");
       home.style.maxHeight = "none";
       home.style.overflow = "visible";
       home.style.opacity = "1";
-      const tabs = document.querySelector(".tabs");
+      void home.offsetHeight;
+      const contentH = home.offsetHeight;
       const tcs = getComputedStyle(tabs);
       const ccs = getComputedStyle(c);
       const tabsH = tabs.offsetHeight + parseFloat(tcs.marginBottom);
       const pad = parseFloat(ccs.paddingTop) + parseFloat(ccs.paddingBottom);
-      const h = home.scrollHeight;
-      home.style.maxHeight = h + "px";
-      const total = h + tabsH + pad;
-      const maxH = window.innerHeight * 0.85;
-      c.style.height = Math.min(total, maxH) + "px";
+      const total = contentH + tabsH + pad;
+      home.style.maxHeight = contentH + "px";
+      c.style.height = Math.min(total, window.innerHeight * 0.85) + "px";
       requestAnimationFrame(() => home.classList.remove("no-anim"));
     })();
 
