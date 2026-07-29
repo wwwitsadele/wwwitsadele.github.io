@@ -29,6 +29,7 @@ body {
   position: relative;
   z-index: 2;
   margin-top: 10vh;
+  margin-bottom: 10vh;
   padding: 2rem;
   background: rgba(0, 0, 0, 0.28);
   backdrop-filter: blur(12px);
@@ -36,7 +37,7 @@ body {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
   width: 960px;
   max-width: 95vw;
-  height: 65vh;
+  height: calc(100vh - 2 * 10vh - 2 * 2rem);
   display: flex;
   flex-direction: column;
 }
