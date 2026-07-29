@@ -41,13 +41,8 @@ function createBlossom() {
   blossom.style.left = Math.random() * 100 + "vw";
   blossom.style.animationDuration = (20 + Math.random() * 15) + "s";
   blossom.style.width = (15 + Math.random() * 55) + "px";
-  if (Math.random() < 0.75) {
-    blossom.style.zIndex = 1;
-    blossom.style.pointerEvents = "none";
-  } else {
-    blossom.style.zIndex = 3;
-    blossom.addEventListener("mouseenter", () => blossom.remove(), { once: true });
-  }
+  blossom.style.zIndex = Math.random() < 0.75 ? 1 : 3;
+  blossom.addEventListener("mouseenter", () => blossom.remove(), { once: true });
   const wind = ((0.5 - mouseX / window.innerWidth)) * 40;
   blossom.style.setProperty("--wind", wind + "vw");
   document.body.appendChild(blossom);
