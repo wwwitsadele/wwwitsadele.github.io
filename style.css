@@ -28,8 +28,8 @@ body {
 .container, .card {
   position: relative;
   z-index: 2;
-  margin-top: 15vh;
-  margin-bottom: 15vh;
+  margin-top: 13vh;
+  margin-bottom: 13vh;
   padding: 2rem;
   background: rgba(0, 0, 0, 0.28);
   backdrop-filter: blur(12px);
@@ -37,7 +37,7 @@ body {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
   width: 960px;
   max-width: 95vw;
-  height: calc(100vh - 2 * 15vh - 2 * 2rem);
+  height: calc(100vh - 2 * 13vh - 2 * 2rem);
   display: flex;
   flex-direction: column;
 }
