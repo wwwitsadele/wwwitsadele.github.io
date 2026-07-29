@@ -15,7 +15,7 @@ body {
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
   color: #fff;
-  text-shadow: 0 1px 6px rgba(0,0,0,0.35);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.55);
 }
 
 @keyframes gradientShift {
@@ -28,8 +28,8 @@ body {
   position: relative;
   z-index: 2;
   padding: 2rem;
-  backdrop-filter: blur(6px);
-  background: rgba(0, 0, 0, 0.18);
+  background: rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(12px);
   border-radius: 20px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
   width: 960px;
@@ -45,6 +45,7 @@ body {
   -ms-overflow-style: none;
   flex-shrink: 1;
   min-height: 0;
+  background: rgba(0, 0, 0, 0.08);
 }
 
 .scroll-area::-webkit-scrollbar {

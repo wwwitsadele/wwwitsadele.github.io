@@ -18,7 +18,7 @@
       margin-bottom: 1.5rem;
       flex-wrap: wrap;
     }
-    .tab {
+    .tab, .tab-link, #contact-form button {
       padding: 0.5rem 1.5rem;
       border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 999px;
@@ -27,14 +27,17 @@
       font-size: 0.95rem;
       font-weight: 600;
       cursor: pointer;
-      transition: 0.3s;
+      transition: 0.15s;
       backdrop-filter: blur(4px);
       letter-spacing: 0.02em;
     }
-    .tab:hover {
+    .tab:hover, .tab-link:hover, #contact-form button:hover {
       background: rgba(255, 255, 255, 0.18);
       border-color: rgba(255, 255, 255, 0.35);
       color: #fff;
+    }
+    .tab:active, .tab-link:active, #contact-form button:active {
+      transform: scale(0.97);
     }
     .tab.active {
       background: linear-gradient(135deg, rgba(255,182,193,0.3), rgba(221,160,221,0.3));
@@ -46,26 +49,10 @@
     .tab-content.active { display: block; }
     .tab-link {
       display: inline-flex;
-      padding: 0.5rem 1.5rem;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.08);
-      color: rgba(255, 255, 255, 0.75);
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.3s;
-      backdrop-filter: blur(4px);
-      letter-spacing: 0.02em;
       text-decoration: none;
       margin: 0;
       align-items: center;
       gap: 0.4rem;
-    }
-    .tab-link:hover {
-      background: rgba(255, 255, 255, 0.18);
-      border-color: rgba(255, 255, 255, 0.35);
-      color: #fff;
     }
     #contact-form {
       display: flex;
@@ -101,21 +88,7 @@
       resize: vertical;
     }
     #contact-form button {
-      padding: 0.6rem 1.5rem;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.12);
-      color: #fff;
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.3s;
-      backdrop-filter: blur(4px);
-      letter-spacing: 0.02em;
-    }
-    #contact-form button:hover {
-      background: rgba(255, 255, 255, 0.22);
-      border-color: rgba(255, 255, 255, 0.5);
+      margin-top: 0.25rem;
     }
     #form-status {
       font-size: 0.9rem;
@@ -169,6 +142,49 @@
     .scroll-fade.visible {
       opacity: 1;
     }
+    .home-content {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      text-align: left;
+    }
+    .home-image-wrapper {
+      flex-shrink: 0;
+      width: 280px;
+      height: 350px;
+      border-radius: 24px;
+      overflow: hidden;
+      mask-image: linear-gradient(to right, black 55%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, black 55%, transparent 100%);
+    }
+    .home-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .home-text {
+      flex: 1;
+    }
+    .home-text h1 {
+      font-size: 2.2rem;
+      text-align: left;
+    }
+    @media (max-width: 680px) {
+      .home-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+      }
+      .home-image-wrapper {
+        width: 180px;
+        height: 220px;
+      }
+      .home-text h1 {
+        text-align: center;
+        font-size: 1.6rem;
+      }
+    }
     .photo-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -197,16 +213,23 @@
       <button class="tab active" data-tab="home">Home</button>
       <button class="tab" data-tab="about">About Me</button>
       <button class="tab" data-tab="photos">Photos</button>
-      <a class="tab-link" href="https://www.linkedin.com/in/wwwitsadele" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="tab-link" href="https://www.linkedin.com/in/adelehattingh" target="_blank" rel="noopener">LinkedIn</a>
       <button class="tab" data-tab="contact">Contact</button>
     </nav>
 
     <div class="scroll-wrapper">
       <div class="scroll-area">
         <div id="home" class="tab-content active">
-          <h1 id="greeting">✨ Hi, I&rsquo;m Ad&eacute;le ✨</h1>
-          <p id="tagline"></p>
-      </div>
+          <div class="home-content">
+            <div class="home-image-wrapper">
+              <img src="pictures/me.jpeg" alt="Ad&eacute;le">
+            </div>
+            <div class="home-text">
+              <h1 id="greeting">✨ Hi, I&rsquo;m Ad&eacute;le ✨</h1>
+              <p id="tagline"></p>
+            </div>
+          </div>
+        </div>
         <div id="about" class="tab-content">
           <h1>✨ About Me ✨</h1>
           <p>I&rsquo;m Ad&eacute;le, a Senior Behaviour Therapist and Designated Safeguarding Lead working with autistic children and young people, and with the people and systems around them.</p>
