@@ -400,8 +400,16 @@
       home.style.maxHeight = h + "px";
       home.style.opacity = "1";
       home.style.overflow = "visible";
-      requestAnimationFrame(() => home.classList.remove("no-anim"));
+      requestAnimationFrame(() => {
+        home.classList.remove("no-anim");
+        lockGlassHeight();
+      });
     })();
+
+    function lockGlassHeight() {
+      const c = document.querySelector(".container");
+      c.style.height = c.offsetHeight + "px";
+    }
 
     function updateScrollFade() {
       const sa = document.querySelector(".scroll-area");
