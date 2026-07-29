@@ -15,6 +15,7 @@
 - `style.css` — shared styles across all pages
 - `blossom.js` — shared blossom/wind logic for all pages
 - `blom.png` — blossom image for falling animation
+- `blossom-icon.png` — small inline blossom icon (replaces ✨ in headings)
 - `favicon/` — favicon set (PNG, SVG, ICO, web manifest)
 - `CNAME` — custom domain (`itsadele.com`)
 
