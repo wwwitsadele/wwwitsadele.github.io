@@ -327,25 +327,36 @@
       document.getElementById("tagline").textContent = taglines[Math.floor(Math.random() * taglines.length)];
     }
 
+    function measure(el) {
+      el.style.maxHeight = "none";
+      el.style.overflow = "visible";
+      el.style.opacity = "1";
+      const h = el.scrollHeight;
+      el.style.maxHeight = "";
+      el.style.overflow = "";
+      el.style.opacity = "";
+      return h;
+    }
+
     function expandTab(el) {
+      const h = measure(el);
       el.classList.add("active");
       el.style.maxHeight = "0";
       el.style.opacity = "0";
+      el.style.overflow = "hidden";
       el.offsetHeight;
-      el.style.maxHeight = el.scrollHeight + "px";
+      el.style.maxHeight = h + "px";
       el.style.opacity = "1";
-      setTimeout(() => {
-        el.style.maxHeight = "";
-        el.style.opacity = "";
-      }, 300);
     }
 
     function collapseTab(el) {
-      el.style.maxHeight = el.scrollHeight + "px";
+      const h = measure(el);
+      el.style.maxHeight = h + "px";
       el.style.opacity = "1";
       el.offsetHeight;
       el.style.maxHeight = "0";
       el.style.opacity = "0";
+      el.style.overflow = "hidden";
     }
 
     function switchTab(tabId) {
@@ -365,7 +376,7 @@
             document.querySelector(".scroll-area").scrollTop = 0;
             updateScrollFade();
             if (tabId === "home") pickTagline();
-          }, 280);
+          }, 300);
         }, 280);
       } else {
         expandTab(next);
@@ -376,9 +387,11 @@
 
     (function initTab() {
       const home = document.getElementById("home");
+      const h = measure(home);
       home.classList.add("no-anim", "active");
-      home.style.maxHeight = home.scrollHeight + "px";
+      home.style.maxHeight = h + "px";
       home.style.opacity = "1";
+      home.style.overflow = "visible";
       requestAnimationFrame(() => home.classList.remove("no-anim"));
     })();
 
