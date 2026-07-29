@@ -43,12 +43,6 @@
     }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
-    .visitor {
-      font-size: 0.85rem;
-      margin-top: 1.5rem;
-      opacity: 0.6;
-    }
-
     #contact-form {
       display: flex;
       flex-direction: column;
@@ -186,8 +180,7 @@
         <div id="home" class="tab-content active">
           <h1 id="greeting">✨ Hi, I&rsquo;m Ad&eacute;le ✨</h1>
           <p id="tagline"></p>
-          <p class="visitor" id="visitor"></p>
-        </div>
+      </div>
         <div id="about" class="tab-content">
           <h1>✨ About Me ✨</h1>
           <p>I&rsquo;m Ad&eacute;le, a Senior Behaviour Therapist and Designated Safeguarding Lead working with autistic children and young people, and with the people and systems around them.</p>
@@ -304,13 +297,6 @@
     document.querySelectorAll(".tab").forEach(btn => {
       btn.addEventListener("click", () => switchTab(btn.dataset.tab));
     });
-
-    fetch("https://api.counterapi.dev/v1/itsadele/visitors/up")
-      .then(r => r.json())
-      .then(d => {
-        document.getElementById("visitor").textContent = "you\u2019re visitor #" + d.count;
-      })
-      .catch(() => {});
 
     document.getElementById("contact-form").addEventListener("submit", function (e) {
       e.preventDefault();

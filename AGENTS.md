@@ -7,7 +7,7 @@
 # Project
 - Static personal landing page for Adéle
 - Glass card with tabs: Home, About Me, Photos, Contact
-- Features: falling blossoms, cursor trail, wind effect, time-aware greeting, random taglines, visitor counter, photo grid, contact form (staticforms.dev)
+- Features: falling blossoms, cursor trail, wind effect, time-aware greeting, random taglines, photo grid, contact form (staticforms.dev)
 - No build step — deploy by pushing to `main`
 
 # Key files
