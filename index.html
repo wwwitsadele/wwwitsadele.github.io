@@ -14,8 +14,9 @@
     .tabs {
       display: flex;
       gap: 0.5rem;
-      justify-content: center;
+      justify-content: flex-start;
       margin-bottom: 1.5rem;
+      flex-wrap: wrap;
     }
     .tab {
       padding: 0.5rem 1.5rem;
@@ -43,6 +44,29 @@
     }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
+    .tab-link {
+      display: inline-flex;
+      padding: 0.5rem 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      backdrop-filter: blur(4px);
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      margin: 0;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .tab-link:hover {
+      background: rgba(255, 255, 255, 0.18);
+      border-color: rgba(255, 255, 255, 0.35);
+      color: #fff;
+    }
     #contact-form {
       display: flex;
       flex-direction: column;
@@ -52,24 +76,25 @@
     #contact-form input,
     #contact-form textarea {
       padding: 0.6rem 0.9rem;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       border-radius: 8px;
-      background: rgba(255, 255, 255, 0.08);
-      color: #fff;
+      background: rgba(255, 255, 255, 0.5);
+      color: #000;
+      font-weight: 700;
       font-size: 0.95rem;
       font-family: inherit;
-      backdrop-filter: blur(4px);
       transition: 0.3s;
     }
     #contact-form input::placeholder,
     #contact-form textarea::placeholder {
-      color: rgba(255, 255, 255, 0.5);
+      color: rgba(0, 0, 0, 0.45);
+      font-weight: 400;
     }
     #contact-form input:focus,
     #contact-form textarea:focus {
       outline: none;
-      border-color: rgba(255, 255, 255, 0.5);
-      background: rgba(255, 255, 255, 0.14);
+      border-color: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.7);
     }
     #contact-form textarea {
       min-height: 100px;
@@ -172,6 +197,7 @@
       <button class="tab active" data-tab="home">Home</button>
       <button class="tab" data-tab="about">About Me</button>
       <button class="tab" data-tab="photos">Photos</button>
+      <a class="tab-link" href="https://www.linkedin.com/in/wwwitsadele" target="_blank" rel="noopener">LinkedIn</a>
       <button class="tab" data-tab="contact">Contact</button>
     </nav>
 
