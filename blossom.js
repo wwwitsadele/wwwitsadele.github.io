@@ -43,8 +43,10 @@ function createBlossom() {
   blossom.style.width = (15 + Math.random() * 55) + "px";
   if (Math.random() < 0.75) {
     blossom.style.zIndex = 1;
+    blossom.style.pointerEvents = "none";
   } else {
     blossom.style.zIndex = 3;
+    blossom.addEventListener("mouseenter", () => blossom.remove(), { once: true });
   }
   const wind = ((0.5 - mouseX / window.innerWidth)) * 40;
   blossom.style.setProperty("--wind", wind + "vw");

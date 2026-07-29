@@ -87,7 +87,6 @@ a:hover {
 .blossom {
   position: absolute;
   top: -10vh;
-  pointer-events: none;
   animation: fall linear infinite;
 }
 
