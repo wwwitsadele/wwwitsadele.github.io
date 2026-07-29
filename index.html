@@ -399,23 +399,22 @@
 
     (function initTab() {
       const home = document.getElementById("home");
-      const h = measure(home);
+      const c = document.querySelector(".container");
       home.classList.add("no-anim", "active");
-      home.style.maxHeight = h + "px";
-      home.style.opacity = "1";
+      home.style.maxHeight = "none";
       home.style.overflow = "visible";
-      requestAnimationFrame(() => {
-        home.classList.remove("no-anim");
-        const c = document.querySelector(".container");
-        const tabs = document.querySelector(".tabs");
-        const tcs = getComputedStyle(tabs);
-        const ccs = getComputedStyle(c);
-        const tabsH = tabs.offsetHeight + parseFloat(tcs.marginBottom);
-        const pad = parseFloat(ccs.paddingTop) + parseFloat(ccs.paddingBottom);
-        const total = h + tabsH + pad;
-        const maxH = window.innerHeight * 0.85;
-        c.style.height = Math.min(total, maxH) + "px";
-      });
+      home.style.opacity = "1";
+      const tabs = document.querySelector(".tabs");
+      const tcs = getComputedStyle(tabs);
+      const ccs = getComputedStyle(c);
+      const tabsH = tabs.offsetHeight + parseFloat(tcs.marginBottom);
+      const pad = parseFloat(ccs.paddingTop) + parseFloat(ccs.paddingBottom);
+      const h = home.scrollHeight;
+      home.style.maxHeight = h + "px";
+      const total = h + tabsH + pad;
+      const maxH = window.innerHeight * 0.85;
+      c.style.height = Math.min(total, maxH) + "px";
+      requestAnimationFrame(() => home.classList.remove("no-anim"));
     })();
 
     function updateScrollFade() {
