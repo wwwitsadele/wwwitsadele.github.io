@@ -402,14 +402,15 @@
       home.style.overflow = "visible";
       requestAnimationFrame(() => {
         home.classList.remove("no-anim");
-        lockGlassHeight();
+        const c = document.querySelector(".container");
+        const tabs = document.querySelector(".tabs");
+        const tabsH = tabs.offsetHeight + 24;
+        const pad = 64;
+        const total = h + tabsH + pad;
+        const maxH = window.innerHeight * 0.85;
+        c.style.height = Math.min(total, maxH) + "px";
       });
     })();
-
-    function lockGlassHeight() {
-      const c = document.querySelector(".container");
-      c.style.height = c.offsetHeight + "px";
-    }
 
     function updateScrollFade() {
       const sa = document.querySelector(".scroll-area");
