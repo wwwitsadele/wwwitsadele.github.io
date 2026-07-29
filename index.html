@@ -359,6 +359,7 @@
       el.offsetHeight;
       el.style.maxHeight = h + "px";
       el.style.opacity = "1";
+      setTimeout(() => { el.style.overflow = ""; }, 300);
     }
 
     function collapseTab(el) {
