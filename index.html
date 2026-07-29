@@ -336,13 +336,17 @@
     }
 
     function measure(el) {
-      el.style.maxHeight = "none";
-      el.style.overflow = "visible";
-      el.style.opacity = "1";
+      const s = el.style;
+      const prev = s.transition;
+      s.transition = "none";
+      s.maxHeight = "none";
+      s.overflow = "visible";
+      s.opacity = "1";
       const h = el.scrollHeight;
-      el.style.maxHeight = "";
-      el.style.overflow = "";
-      el.style.opacity = "";
+      s.maxHeight = "";
+      s.overflow = "";
+      s.opacity = "";
+      s.transition = prev;
       return h;
     }
 
@@ -404,8 +408,10 @@
         home.classList.remove("no-anim");
         const c = document.querySelector(".container");
         const tabs = document.querySelector(".tabs");
-        const tabsH = tabs.offsetHeight + 24;
-        const pad = 64;
+        const tcs = getComputedStyle(tabs);
+        const ccs = getComputedStyle(c);
+        const tabsH = tabs.offsetHeight + parseFloat(tcs.marginBottom);
+        const pad = parseFloat(ccs.paddingTop) + parseFloat(ccs.paddingBottom);
         const total = h + tabsH + pad;
         const maxH = window.innerHeight * 0.85;
         c.style.height = Math.min(total, maxH) + "px";
