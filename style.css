@@ -7,7 +7,7 @@ html, body {
 body {
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   text-align: center;
   font-family: 'Segoe UI', sans-serif;
@@ -27,6 +27,7 @@ body {
 .container, .card {
   position: relative;
   z-index: 2;
+  margin-top: 3vh;
   padding: 2rem;
   background: rgba(0, 0, 0, 0.28);
   backdrop-filter: blur(12px);
