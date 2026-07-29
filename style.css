@@ -28,7 +28,7 @@ body {
 .container, .card {
   position: relative;
   z-index: 2;
-  margin-top: 5vh;
+  margin-top: 10vh;
   padding: 2rem;
   background: rgba(0, 0, 0, 0.28);
   backdrop-filter: blur(12px);
