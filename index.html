@@ -46,14 +46,10 @@
       box-shadow: 0 2px 12px rgba(255, 255, 255, 0.15);
     }
     .tab-content {
-      display: block;
-      max-height: 0;
-      opacity: 0;
-      overflow: hidden;
-      transition: max-height 0.28s ease, opacity 0.18s ease;
+      display: none;
     }
-    .tab-content.no-anim {
-      transition: none;
+    .tab-content.active {
+      display: block;
     }
     .tab-link {
       display: inline-flex;
@@ -136,6 +132,7 @@
       flex: 1;
       min-height: 0;
       overflow-y: auto;
+      overflow-x: hidden;
       scrollbar-width: none;
       -ms-overflow-style: none;
     }
@@ -335,43 +332,6 @@
       document.getElementById("tagline").textContent = taglines[Math.floor(Math.random() * taglines.length)];
     }
 
-    function measure(el) {
-      const s = el.style;
-      const prev = s.transition;
-      s.transition = "none";
-      s.maxHeight = "none";
-      s.overflow = "visible";
-      s.opacity = "1";
-      const h = el.scrollHeight;
-      s.maxHeight = "";
-      s.overflow = "";
-      s.opacity = "";
-      s.transition = prev;
-      return h;
-    }
-
-    function expandTab(el) {
-      const h = measure(el);
-      el.classList.add("active");
-      el.style.maxHeight = "0";
-      el.style.opacity = "0";
-      el.style.overflow = "hidden";
-      el.offsetHeight;
-      el.style.maxHeight = h + "px";
-      el.style.opacity = "1";
-      setTimeout(() => { el.style.overflow = ""; }, 300);
-    }
-
-    function collapseTab(el) {
-      const h = measure(el);
-      el.style.maxHeight = h + "px";
-      el.style.opacity = "1";
-      el.offsetHeight;
-      el.style.maxHeight = "0";
-      el.style.opacity = "0";
-      el.style.overflow = "hidden";
-    }
-
     function switchTab(tabId) {
       const current = document.querySelector(".tab-content.active");
       const next = document.getElementById(tabId);
@@ -380,38 +340,22 @@
       document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
       document.querySelector(`.tab[data-tab="${tabId}"]`).classList.add("active");
 
-      if (current) {
-        collapseTab(current);
-        setTimeout(() => {
-          current.classList.remove("active");
-          expandTab(next);
-          setTimeout(() => {
-            document.querySelector(".scroll-area").scrollTop = 0;
-            updateScrollFade();
-            if (tabId === "home") pickTagline();
-          }, 300);
-        }, 280);
-      } else {
-        expandTab(next);
-        updateScrollFade();
-        if (tabId === "home") pickTagline();
-      }
+      if (current) current.classList.remove("active");
+      next.classList.add("active");
+
+      document.querySelector(".scroll-area").scrollTop = 0;
+      updateScrollFade();
+      if (tabId === "home") pickTagline();
     }
 
     (function initTab() {
       const home = document.getElementById("home");
       const c = document.querySelector(".container");
-      home.classList.add("no-anim", "active");
-      home.style.maxHeight = "none";
-      home.style.overflow = "visible";
-      home.style.opacity = "1";
+      home.classList.add("active");
       void home.offsetHeight;
-      const h = home.offsetHeight;
-      home.style.maxHeight = h + "px";
       const ccs = getComputedStyle(c);
       const pad = parseFloat(ccs.paddingTop) + parseFloat(ccs.paddingBottom);
       c.style.height = (c.offsetHeight - pad) + "px";
-      requestAnimationFrame(() => home.classList.remove("no-anim"));
     })();
 
     function updateScrollFade() {
