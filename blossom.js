@@ -39,7 +39,7 @@ function createBlossom() {
   blossom.src = "blom.png";
   blossom.classList.add("blossom");
   blossom.style.left = Math.random() * 100 + "vw";
-  blossom.style.animationDuration = (5 + Math.random() * 5) + "s";
+  blossom.style.animationDuration = (10 + Math.random() * 10) + "s";
   blossom.style.width = (15 + Math.random() * 55) + "px";
   if (Math.random() < 0.75) {
     blossom.style.zIndex = 1;
@@ -49,7 +49,7 @@ function createBlossom() {
   const wind = ((0.5 - mouseX / window.innerWidth)) * 40;
   blossom.style.setProperty("--wind", wind + "vw");
   document.body.appendChild(blossom);
-  setTimeout(() => blossom.remove(), 10000);
+  setTimeout(() => blossom.remove(), 20000);
 }
 
 setInterval(createBlossom, 1500);
