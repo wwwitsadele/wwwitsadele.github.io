@@ -32,8 +32,8 @@ body {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-  width: 860px;
-  max-width: 90vw;
+  width: 960px;
+  max-width: 95vw;
   height: 60vh;
   display: flex;
   flex-direction: column;
