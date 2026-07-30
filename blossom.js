@@ -36,7 +36,7 @@ requestAnimationFrame(fadeTrail);
 function createBlossom() {
   if (document.querySelectorAll(".blossom").length > 8) return;
   const blossom = document.createElement("img");
-  blossom.src = "blom.png";
+  blossom.src = "blossom.jpg";
   blossom.classList.add("blossom");
   blossom.style.left = Math.random() * 100 + "vw";
   blossom.style.animationDuration = (20 + Math.random() * 15) + "s";
