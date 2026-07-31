@@ -134,6 +134,11 @@
       const next = document.getElementById(tabId);
       if (current === next) return;
 
+      const tabOrder = ["home", "about", "photos", "contact"];
+      const currentIndex = tabOrder.indexOf(current.id);
+      const nextIndex = tabOrder.indexOf(tabId);
+      const direction = nextIndex > currentIndex ? "slide-right" : "slide-left";
+
       const tabBtn = document.querySelector(`.tab[data-tab="${tabId}"]`);
       document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
       tabBtn.classList.add("active");
@@ -141,7 +146,11 @@
       tabBtn.scrollIntoView({ behavior: "smooth", inline: "nearest", block: "nearest" });
 
       if (current) current.classList.remove("active");
+      next.classList.add(direction);
       next.classList.add("active");
+      next.addEventListener("animationend", () => {
+        next.classList.remove("slide-left", "slide-right");
+      }, { once: true });
 
       document.querySelector(".scroll-area").scrollTop = 0;
       updateScrollFade();
