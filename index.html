@@ -186,7 +186,7 @@
     let hoverTimeout = null;
     document.querySelectorAll(".tab").forEach(btn => {
       btn.addEventListener("mouseenter", () => {
-        hoverTimeout = setTimeout(() => switchTab(btn.dataset.tab), 200);
+        hoverTimeout = setTimeout(() => switchTab(btn.dataset.tab), 400);
       });
       btn.addEventListener("mouseleave", () => {
         if (hoverTimeout) {
