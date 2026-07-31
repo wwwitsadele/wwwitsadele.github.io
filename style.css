@@ -225,7 +225,7 @@ a:hover {
 @keyframes tabSlideFromRight {
   from {
     opacity: 0;
-    transform: translateX(300px);
+    transform: translateX(600px);
   }
   to {
     opacity: 1;
@@ -236,7 +236,7 @@ a:hover {
 @keyframes tabSlideFromLeft {
   from {
     opacity: 0;
-    transform: translateX(-300px);
+    transform: translateX(-600px);
   }
   to {
     opacity: 1;
