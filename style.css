@@ -215,11 +215,11 @@ a:hover {
 }
 
 .tab-content.active.slide-right {
-  animation: tabSlideFromRight 0.3s ease-out;
+  animation: tabSlideFromRight 0.5s ease-out;
 }
 
 .tab-content.active.slide-left {
-  animation: tabSlideFromLeft 0.3s ease-out;
+  animation: tabSlideFromLeft 0.5s ease-out;
 }
 
 @keyframes tabSlideFromRight {
