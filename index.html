@@ -115,11 +115,16 @@
       #contact-form textarea {
         flex: 1 1 240px;
       }
-      #contact-form button {
+      .form-actions {
         flex: 1 1 100%;
-        width: fit-content;
-        margin-left: auto;
+        display: flex;
+        justify-content: flex-end;
       }
+    }
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 0.25rem;
     }
     #contact-form button {
       align-self: flex-end;
@@ -327,7 +332,9 @@
             </div>
             <textarea name="message" placeholder="Your message" rows="5" required></textarea>
             <input type="text" name="honeypot" style="display:none">
-            <button type="submit">Send Message</button>
+            <div class="form-actions">
+              <button type="submit">Send Message</button>
+            </div>
           </form>
           <p id="form-status"></p>
         </div>
