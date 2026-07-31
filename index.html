@@ -75,6 +75,13 @@
       gap: 0.75rem;
       margin-top: 1rem;
     }
+    .form-fields {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      flex: 1;
+      min-width: 200px;
+    }
     #contact-form input,
     #contact-form textarea {
       padding: 0.1rem 0.9rem;
@@ -88,23 +95,30 @@
       transition: 0.3s;
     }
     #contact-form input {
-      width: min(100%, 320px);
-      align-self: flex-start;
-    }
-    #contact-form input::placeholder,
-    #contact-form textarea::placeholder {
-      color: rgba(0, 0, 0, 0.45);
-      font-weight: 400;
-    }
-    #contact-form input:focus,
-    #contact-form textarea:focus {
-      outline: none;
-      border-color: rgba(255, 255, 255, 0.7);
-      background: rgba(255, 255, 255, 0.7);
+      width: 100%;
     }
     #contact-form textarea {
+      flex: 1;
       min-height: 60px;
       resize: vertical;
+    }
+    @media (min-width: 700px) {
+      #contact-form {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: stretch;
+      }
+      .form-fields {
+        flex: 0 1 280px;
+      }
+      #contact-form textarea {
+        flex: 1 1 240px;
+      }
+      #contact-form button {
+        flex: 1 1 100%;
+        width: fit-content;
+        margin-left: auto;
+      }
     }
     #contact-form button {
       align-self: flex-end;
@@ -305,9 +319,11 @@
           <p>I&rsquo;d love to hear from you.</p>
           <form id="contact-form" action="https://api.staticforms.dev/submit" method="POST">
             <input type="hidden" name="accessKey" value="sf_5fca25ccddeffa162ae7e780">
-            <input type="text" name="name" placeholder="Your name" required>
-            <input type="email" name="email" placeholder="Your email" required>
-            <input type="text" name="subject" placeholder="Subject" required>
+            <div class="form-fields">
+              <input type="text" name="name" placeholder="Your name" required>
+              <input type="email" name="email" placeholder="Your email" required>
+              <input type="text" name="subject" placeholder="Subject" required>
+            </div>
             <textarea name="message" placeholder="Your message" rows="5" required></textarea>
             <input type="text" name="honeypot" style="display:none">
             <button type="submit">Send Message</button>
