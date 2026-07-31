@@ -137,7 +137,7 @@
       const tabOrder = ["home", "about", "photos", "contact"];
       const currentIndex = tabOrder.indexOf(current.id);
       const nextIndex = tabOrder.indexOf(tabId);
-      const direction = nextIndex > currentIndex ? "slide-right" : "slide-left";
+      const slideDir = nextIndex > currentIndex ? 300 : -300;
 
       const tabBtn = document.querySelector(`.tab[data-tab="${tabId}"]`);
       document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
@@ -145,17 +145,38 @@
 
       tabBtn.scrollIntoView({ behavior: "smooth", inline: "nearest", block: "nearest" });
 
-      if (current) {
-        current.classList.add("fade-out");
-        current.addEventListener("animationend", () => {
-          current.classList.remove("active", "fade-out");
-        }, { once: true });
-      }
-      next.classList.add(direction);
-      next.classList.add("active");
-      next.addEventListener("animationend", () => {
-        next.classList.remove("slide-left", "slide-right");
-      }, { once: true });
+      const scrollArea = document.querySelector(".scroll-area");
+      scrollArea.style.height = next.scrollHeight + "px";
+
+      next.classList.add("active", "animating");
+      if (current) current.classList.add("animating");
+
+      const fadeOut = current
+        ? current.animate([
+            { opacity: 1 },
+            { opacity: 0 }
+          ], { duration: 1000, easing: "ease-out" })
+        : null;
+
+      const slideIn = next.animate([
+        { opacity: 0, transform: `translateX(${slideDir}px)` },
+        { opacity: 1, transform: "translateX(0)" }
+      ], { duration: 1000, easing: "ease-out" });
+
+      Promise.all([
+        fadeOut ? fadeOut.finished : Promise.resolve(),
+        slideIn.finished
+      ]).then(() => {
+        if (current) {
+          current.classList.remove("active", "animating");
+          current.style.opacity = "";
+          current.style.transform = "";
+        }
+        next.classList.remove("animating");
+        next.style.opacity = "";
+        next.style.transform = "";
+        scrollArea.style.height = "";
+      });
 
       document.querySelector(".scroll-area").scrollTop = 0;
       updateScrollFade();

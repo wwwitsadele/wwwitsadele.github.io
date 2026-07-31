@@ -42,6 +42,7 @@ body {
 }
 
 .scroll-area {
+  position: relative;
   flex: 1;
   min-height: 0;
   overflow-y: auto;
@@ -214,48 +215,11 @@ a:hover {
   display: block;
 }
 
-.tab-content.active.slide-right {
-  animation: tabSlideFromRight 1s ease-out;
-}
-
-.tab-content.active.slide-left {
-  animation: tabSlideFromLeft 1s ease-out;
-}
-
-.tab-content.fade-out {
-  display: block !important;
-  animation: tabFadeOut 1s ease-out forwards;
-}
-
-@keyframes tabFadeOut {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-
-@keyframes tabSlideFromRight {
-  from {
-    opacity: 0;
-    transform: translateX(600px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes tabSlideFromLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-600px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+.tab-content.animating {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 @media (max-width: 640px) {
