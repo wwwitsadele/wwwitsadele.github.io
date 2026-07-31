@@ -19,8 +19,9 @@
 - **Inline blossom icon**: `blossom-icon.svg` replaces ✨ in headings
 
 ### LinkedIn Bio Link
-- **Location**: Navigation bar as a tab-style link (`index.html:231`)
+- **Location**: Bottom-right of the glass pane (`.glass-footer`), visible on all tabs
 - **URL**: `https://www.linkedin.com/in/adelehattingh`
+- **Style**: Monochrome white circular icon button (inline SVG, `fill: currentColor`)
 - **Behaviour**: Opens in new tab (`target="_blank" rel="noopener"`)
 - **Note**: Consider adding a second mention in Home tab content or About Me for visibility
 
