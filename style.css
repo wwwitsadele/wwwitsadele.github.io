@@ -222,6 +222,20 @@ a:hover {
   animation: tabSlideFromLeft 1s ease-out;
 }
 
+.tab-content.fade-out {
+  display: block !important;
+  animation: tabFadeOut 1s ease-out forwards;
+}
+
+@keyframes tabFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 @keyframes tabSlideFromRight {
   from {
     opacity: 0;

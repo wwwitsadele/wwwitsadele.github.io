@@ -145,7 +145,12 @@
 
       tabBtn.scrollIntoView({ behavior: "smooth", inline: "nearest", block: "nearest" });
 
-      if (current) current.classList.remove("active");
+      if (current) {
+        current.classList.add("fade-out");
+        current.addEventListener("animationend", () => {
+          current.classList.remove("active", "fade-out");
+        }, { once: true });
+      }
       next.classList.add(direction);
       next.classList.add("active");
       next.addEventListener("animationend", () => {
