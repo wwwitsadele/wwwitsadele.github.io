@@ -46,10 +46,22 @@
       transform: scale(0.97);
     }
     .tab.active {
+      position: relative;
       background: linear-gradient(135deg, rgba(255,182,193,0.3), rgba(221,160,221,0.3));
       border-color: rgba(255, 255, 255, 0.5);
       color: #fff;
       box-shadow: 0 2px 12px rgba(255, 255, 255, 0.15);
+    }
+    .tab.active::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 100%;
+      transform: translateX(-50%);
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 7px solid rgba(255, 182, 193, 0.5);
+      filter: drop-shadow(0 2px 2px rgba(255, 255, 255, 0.15));
     }
     .tab-content {
       display: none;
