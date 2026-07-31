@@ -183,8 +183,17 @@
     document.querySelector(".scroll-area").addEventListener("scroll", updateScrollFade);
     updateScrollFade();
 
+    let hoverTimeout = null;
     document.querySelectorAll(".tab").forEach(btn => {
-      btn.addEventListener("click", () => switchTab(btn.dataset.tab));
+      btn.addEventListener("mouseenter", () => {
+        hoverTimeout = setTimeout(() => switchTab(btn.dataset.tab), 200);
+      });
+      btn.addEventListener("mouseleave", () => {
+        if (hoverTimeout) {
+          clearTimeout(hoverTimeout);
+          hoverTimeout = null;
+        }
+      });
     });
 
     document.getElementById("contact-form").addEventListener("submit", function (e) {
