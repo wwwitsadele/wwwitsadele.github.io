@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ad&eacute;le</title>
+  <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="/favicon/site.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=5">
+  <style>
+    .tabs {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: flex-start;
+      margin-bottom: 9px;
+      flex-wrap: wrap;
+    }
+    .tab, #contact-form button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.15s;
+      backdrop-filter: blur(4px);
+      letter-spacing: 0.02em;
+    }
+    .tab svg {
+      flex-shrink: 0;
+    }
+    .tab:hover, #contact-form button:hover {
+      background: rgba(255, 255, 255, 0.18);
+      border-color: rgba(255, 255, 255, 0.35);
+      color: #fff;
+    }
+    .tab:active, #contact-form button:active {
+      transform: scale(0.97);
+    }
+    .tab.active {
+      position: relative;
+      z-index: 3;
+      background: linear-gradient(135deg, rgba(255,182,193,0.3), rgba(221,160,221,0.3));
+      border-color: rgba(255, 255, 255, 0.5);
+      color: #fff;
+      box-shadow: 0 2px 12px rgba(255, 255, 255, 0.15);
+    }
+    @media (max-width: 640px) {
+      .tabs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+      .tabs::-webkit-scrollbar {
+        display: none;
+      }
+      .tab, #contact-form button {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+        gap: 0.3rem;
+        white-space: nowrap;
+      }
+      .tab svg {
+        width: 0.85em;
+        height: 0.85em;
+      }
+    }
+    .tab.active::after {
+      content: "";
+      position: absolute;
+      left: 1.2rem;
+      top: 100%;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-bottom: 9px solid rgba(255, 255, 255, 0.4);
+      filter: drop-shadow(0 2px 2px rgba(255, 255, 255, 0.15));
+    }
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    #contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+    .form-fields {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      flex: 1;
+      min-width: 200px;
+    }
+    #contact-form input,
+    #contact-form textarea {
+      box-sizing: border-box;
+      padding: 0.4rem 0.9rem;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.5);
+      color: #000;
+      font-weight: 700;
+      font-size: 0.95rem;
+      font-family: inherit;
+      transition: 0.3s;
+    }
+    #contact-form input {
+      width: 100%;
+    }
+    #contact-form textarea {
+      flex: 1;
+      min-height: 60px;
+      resize: vertical;
+    }
+    @media (min-width: 700px) {
+      #contact-form {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: stretch;
+      }
+      .form-fields {
+        flex: 0 1 280px;
+      }
+      #contact-form textarea {
+        flex: 1 1 240px;
+      }
+      .form-actions {
+        flex: 1 1 100%;
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 0.25rem;
+    }
+    #contact-form button {
+      align-self: flex-end;
+      width: fit-content;
+      margin-top: 0.25rem;
+      background: linear-gradient(135deg, #ffb6c1, #dda0dd);
+      border-color: rgba(255, 255, 255, 0.5);
+      color: #fff;
+      box-shadow: 0 2px 12px rgba(255, 182, 193, 0.35);
+    }
+    #contact-form button:hover {
+      background: linear-gradient(135deg, #ffc2cc, #e0b4e8);
+      border-color: rgba(255, 255, 255, 0.7);
+      box-shadow: 0 4px 18px rgba(255, 182, 193, 0.45);
+    }
+    #form-status {
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      text-align: center;
+    }
+
+    .bi {
+      display: inline;
+      height: 1.2em;
+      width: auto;
+      vertical-align: -0.15em;
+    }
+    .tab-content h2 {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      margin: 1.2rem 0 0.5rem;
+      background: linear-gradient(to right, #ffb6c1, #dda0dd, #87cefa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: none;
+    }
+    .tab-content p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin: 0.8rem 0;
+    }
+    .scroll-wrapper {
+      position: relative;
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+    }
+    .scroll-area {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .scroll-fade {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 32px;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .scroll-fade.top {
+      top: 0;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.12), transparent);
+    }
+    .scroll-fade.bottom {
+      bottom: 0;
+      background: linear-gradient(to top, rgba(255,255,255,0.12), transparent);
+    }
+    .scroll-fade.visible {
+      opacity: 1;
+    }
+    .home-content {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      text-align: left;
+    }
+    .home-image-wrapper {
+      flex-shrink: 0;
+      width: 280px;
+      height: 350px;
+      border-radius: 12px;
+      overflow: hidden;
+      mask-image: linear-gradient(to right, black 55%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, black 55%, transparent 100%);
+    }
+    .home-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .home-text {
+      flex: 1;
+    }
+    .home-text h1 {
+      font-size: 2.2rem;
+      text-align: left;
+    }
+    @media (max-width: 680px) {
+      .home-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+      }
+      .home-image-wrapper {
+        width: 180px;
+        height: 220px;
+      }
+      .home-text h1 {
+        text-align: center;
+        font-size: 1.6rem;
+      }
+    }
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .photo-grid img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .photo-grid img:hover {
+      transform: scale(1.03);
+      border-color: rgba(255, 255, 255, 0.4);
+      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="tabs">
+      <button class="tab active" data-tab="home"><svg viewBox="0 0 24 24" width="0.9em" height="0.9em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> Home</button>
+      <button class="tab" data-tab="about"><svg viewBox="0 0 24 24" width="0.9em" height="0.9em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> About Me</button>
+      <button class="tab" data-tab="photos"><svg viewBox="0 0 24 24" width="0.9em" height="0.9em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg> Photos</button>
+      <button class="tab" data-tab="contact"><svg viewBox="0 0 24 24" width="0.9em" height="0.9em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Contact</button>
+    </nav>
+
+    <div class="scroll-wrapper">
+      <div class="scroll-area">
+        <div id="home" class="tab-content active">
+          <div class="home-content">
+            <div class="home-image-wrapper">
+              <img src="pictures/me.jpeg" alt="Ad&eacute;le">
+            </div>
+            <div class="home-text">
+              <h1 id="greeting"><img src="blossom-icon.svg" class="bi" alt=""> <span id="greeting-time">Hi</span>, I&rsquo;m Ad&eacute;le <img src="blossom-icon.svg" class="bi" alt=""></h1>
+              <p id="tagline"></p>
+            </div>
+          </div>
+        </div>
+        <div id="about" class="tab-content">
+          <h1><img src="blossom-icon.svg" class="bi" alt=""> About Me <img src="blossom-icon.svg" class="bi" alt=""></h1>
+          <p>I&rsquo;m Ad&eacute;le, a Senior Behaviour Therapist and Designated Safeguarding Lead working with autistic children and young people, and with the people and systems around them.</p>
+          <p>But even before that, beyond the job title, I&rsquo;m a writer, a lifelong learner, a lover of the ocean and someone who finds meaning in stories. I&rsquo;ve always been fascinated by what sits beneath the surface: the things people communicate without words, the experiences that shape us, and the small moments that can create lasting change.</p>
+          <p>That curiosity follows me everywhere, from my personal life into my work with young people and the teams who support them.</p>
+          <p>Throughout my career, I have worked at the point where individual support meets whole-school practice: developing Positive Behaviour Support plans, leading behaviour and safeguarding processes, analysing patterns, coaching teams, and helping staff turn theory into something that works in the reality of a classroom on a wet Tuesday morning.</p>
+          <h2>What I believe</h2>
+          <p>Behaviour is communication. The goal is never simply to reduce or manage behaviour, but to approach it with curiosity and connection: to understand what a young person is communicating, increase autonomy, and create environments where they feel safe, understood and able to participate.</p>
+          <p>My work draws on functional assessment, structured teaching, AAC, sensory-informed practice and collaborative problem-solving. These are not just approaches to reference in a document; they are practical tools for understanding the reasons behind behaviour and designing support that respects the individual child. All of this is underpinned by a trauma-informed approach that recognises the importance of safety, relationships and trust.</p>
+          <p>My practice has been shaped by a range of approaches including Makaton, DIR/Floortime, SCERTS and Team Teach. While each model offers different tools, they share a common purpose: supporting communication, strengthening relationships, maintaining dignity and keeping young people safe.</p>
+          <p>Safeguarding is woven through everything I do. Every child and young person has the right to feel safe, understood and respected. For autistic young people and those with complex needs, this means more than responding when something goes wrong. It means creating environments where risks are understood, communication is supported, and staff feel confident to recognise, report and respond to concerns. Safeguarding should live in everyday interactions, not in a folder on a shelf.</p>
+          <p>The best support is never created in isolation. It comes from genuine partnership between educators, therapists, families and, most importantly, the young person themselves. A significant part of my work is building those teams: growing staff confidence, developing shared understanding, and creating consistency around the people we support.</p>
+          <p>Beyond individual support, I work to develop sustainable practice across organisations by strengthening Positive Behaviour Support, improving training, embedding effective systems and ensuring policies reflect the real people they are written for.</p>
+          <p>Because the true measure of change is not what happens in a leadership meeting on a Monday afternoon. It is what happens in a classroom on a Tuesday morning, or at the desk of a staff member searching for a way forward after a difficult day.</p>
+          <p>A significant part of my work involves building the capacity of others: supporting teams to understand behaviour differently, developing staff confidence, and embedding practices that continue to make a difference long after the training session has ended.</p>
+          <p>If you are working to improve understanding, inclusion and quality of life for neurodivergent children and young people, I would love to connect.</p>
+        </div>
+        <div id="photos" class="tab-content">
+          <h1><img src="blossom-icon.svg" class="bi" alt=""> Photos <img src="blossom-icon.svg" class="bi" alt=""></h1>
+          <div class="photo-grid">
+            <img src="pictures/picture1.jpeg" alt="Pink cherry blossoms" loading="lazy">
+            <img src="pictures/picture2.jpeg" alt="Soft focus cherry blossoms" loading="lazy">
+            <img src="pictures/picture3.jpeg" alt="Pink cherry blossoms close-up" loading="lazy">
+            <img src="pictures/picture4.jpeg" alt="Cherry blossoms in bloom" loading="lazy">
+            <img src="pictures/picture5.jpeg" alt="Cherry blossoms pastel sky" loading="lazy">
+            <img src="pictures/picture6.jpeg" alt="Delicate cherry blossom close-up" loading="lazy">
+            <img src="pictures/picture7.jpeg" alt="Cherry blossoms blue sky" loading="lazy">
+            <img src="pictures/picture8.jpeg" alt="Pink cherry blossom flowers with green leaves" loading="lazy">
+          </div>
+        </div>
+        <div id="contact" class="tab-content">
+          <h1><img src="blossom-icon.svg" class="bi" alt=""> Get in Touch <img src="blossom-icon.svg" class="bi" alt=""></h1>
+          <p>I&rsquo;d love to hear from you.</p>
+          <form id="contact-form" action="https://api.staticforms.dev/submit" method="POST">
+            <input type="hidden" name="accessKey" value="sf_5fca25ccddeffa162ae7e780">
+            <div class="form-fields">
+              <input type="text" name="name" placeholder="Your name" required>
+              <input type="email" name="email" placeholder="Your email" required>
+              <input type="text" name="subject" placeholder="Subject" required>
+            </div>
+            <textarea name="message" placeholder="Your message" rows="5" required></textarea>
+            <input type="text" name="honeypot" style="display:none">
+            <div class="form-actions">
+              <button type="submit">Send Message</button>
+            </div>
+          </form>
+          <p id="form-status"></p>
+        </div>
+      </div>
+      <div class="scroll-fade top"></div>
+      <div class="scroll-fade bottom"></div>
+    </div>
+    <footer class="glass-footer">
+      <a class="linkedin-link" href="https://www.linkedin.com/in/adelehattingh" target="_blank" rel="noopener" aria-label="Ad&eacute;le on LinkedIn">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+    </footer>
+  </div>
+
+  <p class="copyright">&copy; itsadele.com</p>
+
+  <script src="blossom.js"></script>
+  <script>
+    const taglines = [
+      "Already in bloom. This little corner of the internet is growing into something beautiful — and you arrived right on time.",
+      "Like petals on the wind, every visit is a fresh start. Glad you're here.",
+      "Bloom where you're planted. Right now, that's right here. Welcome.",
+      "No becoming. Just being. And you're part of it.",
+      "The blossoms fall, the gradient shifts, and here you are. Perfect timing.",
+      "This space grows with every visit. Thanks for being part of its story.",
+      "You don't need to become anything you're not already. Just showing up is enough.",
+      "Every blossom begins where it falls. You're right where you need to be.",
+      "The softest things — petals, light, a kind word — often carry the most weight.",
+      "Let the gradient shift, let the petals fall. You're still here, and that's enough.",
+      "This little space is growing roots and reaching for light. Welcome to the garden.",
+      "Some magic doesn't need to be explained. It just blooms.",
+      "The wind blows where it pleases. So do the blossoms. So do you.",
+      "Not every day needs a destination. Some are just for blooming."
+    ];
+
+    function setGreeting() {
+      const h = new Date().getHours();
+      let time;
+      if (h < 12) time = "Good morning";
+      else if (h < 18) time = "Good afternoon";
+      else time = "Good evening";
+      document.getElementById("greeting").innerHTML = '<img src="blossom-icon.svg" class="bi" alt=""> ' + time + ', I\u2019m Ad\u00e9le <img src="blossom-icon.svg" class="bi" alt="">';
+    }
+    setGreeting();
+
+    document.getElementById("tagline").textContent = taglines[Math.floor(Math.random() * taglines.length)];
+
+    function pickTagline() {
+      document.getElementById("tagline").textContent = taglines[Math.floor(Math.random() * taglines.length)];
+    }
+
+    function switchTab(tabId) {
+      const current = document.querySelector(".tab-content.active");
+      const next = document.getElementById(tabId);
+      if (current === next) return;
+
+      const tabBtn = document.querySelector(`.tab[data-tab="${tabId}"]`);
+      document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
+      tabBtn.classList.add("active");
+
+      tabBtn.scrollIntoView({ behavior: "smooth", inline: "nearest", block: "nearest" });
+
+      if (current) current.classList.remove("active");
+      next.classList.add("active");
+
+      document.querySelector(".scroll-area").scrollTop = 0;
+      updateScrollFade();
+      if (tabId === "home") pickTagline();
+    }
+
+    (function initTab() {
+      const home = document.getElementById("home");
+      const c = document.querySelector(".container");
+      home.classList.add("active");
+      void home.offsetHeight;
+      const ccs = getComputedStyle(c);
+      const pad = parseFloat(ccs.paddingTop) + parseFloat(ccs.paddingBottom);
+      c.style.height = (c.offsetHeight - pad) + "px";
+    })();
+
+    function updateScrollFade() {
+      const sa = document.querySelector(".scroll-area");
+      const top = document.querySelector(".scroll-fade.top");
+      const bottom = document.querySelector(".scroll-fade.bottom");
+      if (sa.scrollHeight <= sa.clientHeight) {
+        top.classList.remove("visible");
+        bottom.classList.remove("visible");
+        return;
+      }
+      top.classList.toggle("visible", sa.scrollTop > 8);
+      bottom.classList.toggle("visible", sa.scrollTop + sa.clientHeight < sa.scrollHeight - 8);
+    }
+
+    document.querySelector(".scroll-area").addEventListener("scroll", updateScrollFade);
+    updateScrollFade();
+
+    document.querySelectorAll(".tab").forEach(btn => {
+      btn.addEventListener("click", () => switchTab(btn.dataset.tab));
+    });
+
+    document.getElementById("contact-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const form = e.target;
+      const status = document.getElementById("form-status");
+      status.textContent = "Sending...";
+      status.style.color = "rgba(255,255,255,0.7)";
+      const data = {};
+      new FormData(form).forEach((v, k) => { if (k !== "honeypot") data[k] = v; });
+      fetch(form.action, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) })
+        .then(r => r.json())
+        .then(d => {
+          if (d.success) {
+            status.textContent = "Thank you! Your message has been sent.";
+            status.style.color = "#a0e7a0";
+            form.reset();
+          } else {
+            status.textContent = "Something went wrong. Please try again.";
+            status.style.color = "#f5a0a0";
+          }
+        })
+        .catch(() => {
+          status.textContent = "Something went wrong. Please try again.";
+          status.style.color = "#f5a0a0";
+        });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <style>
+      .p { fill: #ffb6c1; }
+      .c { fill: #dda0dd; }
+    </style>
+  </defs>
+  <g transform="translate(50 50)">
+    <ellipse class="p" rx="14" ry="34" transform="rotate(0) translate(0 -16)"/>
+    <ellipse class="p" rx="14" ry="34" transform="rotate(72) translate(0 -16)"/>
+    <ellipse class="p" rx="14" ry="34" transform="rotate(144) translate(0 -16)"/>
+    <ellipse class="p" rx="14" ry="34" transform="rotate(216) translate(0 -16)"/>
+    <ellipse class="p" rx="14" ry="34" transform="rotate(288) translate(0 -16)"/>
+    <circle class="c" r="10"/>
+  </g>
+</svg>
