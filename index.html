@@ -157,10 +157,15 @@
       document.getElementById("tagline").textContent = taglines[Math.floor(Math.random() * taglines.length)];
     }
 
+    let isAnimating = false;
+
     function switchTab(tabId) {
+      if (isAnimating) return;
       const current = document.querySelector(".tab-content.active");
       const next = document.getElementById(tabId);
       if (current === next) return;
+
+      isAnimating = true;
 
       const tabOrder = ["home", "about", "photos", "contact"];
       const currentIndex = tabOrder.indexOf(current.id);
@@ -195,6 +200,7 @@
         fadeOut ? fadeOut.finished : Promise.resolve(),
         slideIn.finished
       ]).then(() => {
+        isAnimating = false;
         if (current) {
           current.classList.remove("active", "animating");
           current.style.opacity = "";
@@ -204,7 +210,7 @@
         next.style.opacity = "";
         next.style.transform = "";
         scrollArea.style.height = "";
-      });
+      }).catch(() => { isAnimating = false; });
 
       document.querySelector(".scroll-area").scrollTop = 0;
       updateScrollFade();
