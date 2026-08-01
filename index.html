@@ -9,7 +9,7 @@
   <link rel="shortcut icon" href="/favicon/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
   <link rel="manifest" href="/favicon/site.webmanifest" />
-  <link rel="stylesheet" href="style.css?v=7">
+  <link rel="stylesheet" href="style.css?v=8">
 </head>
 <body>
   <div class="container">
@@ -131,23 +131,10 @@
     }
 
     const indicator = document.querySelector(".tab-indicator");
-    const tabOffsets = {
-      home: () => document.querySelector('.tab[data-tab="home"]').offsetLeft + 19.2,
-      about: () => document.querySelector('.tab[data-tab="about"]').offsetLeft + 19.2,
-      photos: () => document.querySelector('.tab[data-tab="photos"]').offsetLeft + 19.2,
-      contact: () => document.querySelector('.tab[data-tab="contact"]').offsetLeft + 19.2
-    };
 
-    function setIndicator(tabId, animate) {
-      const targetX = tabOffsets[tabId]();
-      if (animate) {
-        const currentX = parseFloat(indicator.dataset.x) || 0;
-        indicator.animate([
-          { transform: `translateX(${currentX}px)` },
-          { transform: `translateX(${targetX}px)` }
-        ], { duration: 1000, easing: "ease-out" });
-      }
-      indicator.dataset.x = targetX;
+    function setIndicator(tabId) {
+      const btn = document.querySelector(`.tab[data-tab="${tabId}"]`);
+      indicator.style.transform = `translateX(${btn.offsetLeft + 19.2}px)`;
     }
 
     function switchTab(tabId) {
@@ -166,7 +153,7 @@
 
       tabBtn.scrollIntoView({ behavior: "smooth", inline: "nearest", block: "nearest" });
 
-      setIndicator(tabId, true);
+      setIndicator(tabId);
 
       const scrollArea = document.querySelector(".scroll-area");
       scrollArea.style.height = next.scrollHeight + "px";
@@ -211,7 +198,7 @@
       const c = document.querySelector(".container");
       home.classList.add("active");
       void home.offsetHeight;
-      setIndicator("home", false);
+      setIndicator("home");
       const ccs = getComputedStyle(c);
       const pad = parseFloat(ccs.paddingTop) + parseFloat(ccs.paddingBottom);
       c.style.height = (c.offsetHeight - pad) + "px";
