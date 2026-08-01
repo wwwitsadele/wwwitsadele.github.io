@@ -137,7 +137,7 @@
       const tabOrder = ["home", "about", "photos", "contact"];
       const currentIndex = tabOrder.indexOf(current.id);
       const nextIndex = tabOrder.indexOf(tabId);
-      const slideDir = nextIndex > currentIndex ? 300 : -300;
+      const slideDir = nextIndex > currentIndex ? 600 : -600;
 
       const tabBtn = document.querySelector(`.tab[data-tab="${tabId}"]`);
       document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
@@ -155,13 +155,13 @@
         ? current.animate([
             { opacity: 1 },
             { opacity: 0 }
-          ], { duration: 1000, easing: "ease-out" })
+          ], { duration: 2500, easing: "ease-out" })
         : null;
 
       const slideIn = next.animate([
         { opacity: 0, transform: `translateX(${slideDir}px)` },
         { opacity: 1, transform: "translateX(0)" }
-      ], { duration: 1000, easing: "ease-out" });
+      ], { duration: 2500, easing: "ease-out" });
 
       Promise.all([
         fadeOut ? fadeOut.finished : Promise.resolve(),
