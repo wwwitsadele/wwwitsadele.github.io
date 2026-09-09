@@ -88,7 +88,8 @@ a:hover {
 
 .glass-footer {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
   margin-top: 0.5rem;
 }
 
@@ -481,4 +482,56 @@ a:hover {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+#tagline {
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+#tagline:hover {
+  opacity: 0.8;
+}
+
+.ctrl-group {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.ctrl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.7rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+  backdrop-filter: blur(4px);
+  line-height: 1;
+}
+
+.ctrl-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.ctrl-btn.off {
+  color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.ctrl-btn.off:hover {
+  color: rgba(255, 255, 255, 0.55);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+body.no-motion {
+  animation: none;
 }
